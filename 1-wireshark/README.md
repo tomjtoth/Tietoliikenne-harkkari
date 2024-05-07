@@ -1,6 +1,6 @@
 # Wireshark tehtävä
 
-Wiresharkin asennuksen jälkeen lisäsin itseäni `sudo usermod -a -G wireshark $(whoami)`, langattomaan en päässyt vielä, joten kokeilin huvikseen `bluetooth0` kaappauksen. Liitin läppäriin langattomat kuulokkeet, kokeilin `play/pause`, `volume up/down` ja `prev/next` toiminnat, näitä näkee helpoiten kun suodattaa `bluetooth.src == 63:e8:a9:38:b0:2d` jossa MAC osoite kuuluu langattomiin kuulokkeisiin.
+Wiresharkin asennuksen jälkeen lisäsin itseäni `sudo usermod -a -G wireshark $(whoami)`, langattomaan en päässyt vielä, joten kokeilin huvikseen `bluetooth0` kaappauksen. Liitin läppäriin langattomat kuulokkeet, kokeilin `play/pause` ja `volume up/down` toiminnat, näitä näkee helpoiten kun suodattaa `bluetooth.src == 63:e8:a9:38:b0:2d` jossa MAC osoite kuuluu langattomiin kuulokkeisiin.
 
 ![bluetooth-play-pause](./bluetooth-play-pause.png)
 
@@ -28,6 +28,8 @@ toi I/O graph oli pikkasen hauskempi, kun näpyttelin satunnaisesti ja runsaasti
 
 ![SSH I/O graph](./ssh-io-graph.png)
 
+Jommassakummassa visualisoinnissa oli lähes pakko laittaa päälle samat suodattimet (näkyy kuvakaappausten alapuolissa), muuten näkyy **kaikki** kaapattu liikenne josta ei saa mitään selväksi.
+
 Myös huomaa että joka 120 sekunnin välein SSH kommunikoi joka johtuu `~/.ssh/config` tiedoston `ServerAliveInterval 120` rivistä, jota olen säätänyt aiemmin muista syistä:
 
 ![SSH keepalive](./ssh-keepalive.png)
@@ -40,6 +42,9 @@ Toisaalta jos SSH ei kuuntele vakioportilla 22, niin wireshark ei enää ees nä
 
 ![SSH handshake@55522](./ssh-handshake-55522.png)
 
+Kolmantena visualisointina kokeilin *DNS* näkymää josta huomaa, että query:sta on enemmän kuin response:sta (241 vs 84), sekä `A`:sta (IPv4) enemmän, kuin `AAAA`:sta (IPv6) (169 vs 156):
+
+![DNS](./dns.png)
 
 ## Tunnit
 
@@ -49,3 +54,7 @@ Toisaalta jos SSH ei kuuntele vakioportilla 22, niin wireshark ei enää ees nä
 		- `tcp.port == 55522 || ssh`
 		- `dns`
 		- `bluetooth.src == 63:e8:a9:38:b0:2d`
+			- halpis Lenovo LP40 kuulokkeet
+
+- 7.5 ~ 1t
+	- DNS visualization
