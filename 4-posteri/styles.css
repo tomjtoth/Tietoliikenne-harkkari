@@ -1,0 +1,25 @@
+:root {
+  --orange: orange;
+}
+
+@page {
+  size: 29.7cm 42cm;
+  /* margin: 10mm 15mm 10mm 15mm; */
+}
+
+.joku-fontti {
+  font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+}
+
+.caps {
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.orange {
+  color: var(--orange);
+}
+
+.gray {
+  color: gray;
+}
