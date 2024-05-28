@@ -59,16 +59,3 @@ Koneessa **#2**:
   - samoin, kuin eka siirron jälkeen, lopetetaan liikenteen kaappausta
 
 Sitten Wireshark:ssa vertaillaan `ip.addr == 10.0.0.1` filtterin avulla molemmassa tapauksessa montako kappaletta pakettia on vaihtunut, ja mikä oli pakettien yhteenlaskettu koko.
-
-## Tunnit
-
-- 16.5 ~ 6t
-
-  - tehtävänannon lukeminen
-  - tutkimuksen menetelmän kuvaus
-  - nginx.conf
-
-- 17.5 ~ 2t
-
-  - luovutin nginx:sta, sortuin yksinkertaisen python skriptin käyttöön
-  - hioin sanoitusta + laitoin enemmän yksityiskohtaa, kuten prosessin taustalle siirto, yms

@@ -88,14 +88,3 @@ Keskustelun paketit näkyy eri tavalla, ei välttämättä paremmin alla flow ch
 Seuraavaa 2kpl pakettia kuului kaappauksessani SSH protokollaan, IP osoitteiden perusteella SVM-11 on lähettänyt Melkille curl:in konsooliriville tulostettuja muutoksia yhtenä viestinä, jota Melkki on kuitannut. Loput SSH protokollan paketit antaa ilmi miten olen nostanut foregroundiin sen kaappausprosessin ja lopettanut kaappausta.
 
 ![packets 76-91](img/76-91.png)
-
-## Tunnit
-
-- 7.5 ~ 1t
-  - 2 kaappauskokeilua
-- 8.5 ~ 2t
-  - onnistuin kaappaamaan VM:ssa SVM-11 luettavan/siirrettävän tiedoston + kirjasin tän raportin
-- 12.5 ~ 2t
-  - raportin jatkaminen
-- 13.5 ~ 3t
-  - raportin jatkaminen

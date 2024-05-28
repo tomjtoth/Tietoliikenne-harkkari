@@ -45,17 +45,3 @@ Toisaalta jos SSH ei kuuntele vakioportilla 22, niin wireshark ei enää ees nä
 Kolmantena visualisointina kokeilin _DNS_ näkymää josta huomaa, että query:sta on enemmän kuin response:sta (241 vs 84), sekä `A`:sta (IPv4) enemmän, kuin `AAAA`:sta (IPv6) (169 vs 156):
 
 ![DNS](img/dns.png)
-
-## Tunnit
-
-- 6.5 ~ 4t
-
-  - kurssimateriaalin läpikäynti
-  - suodattimet
-    - `tcp.port == 55522 || ssh`
-    - `dns`
-    - `bluetooth.src == 63:e8:a9:38:b0:2d`
-      - halpis Lenovo LP40 kuulokkeet
-
-- 7.5 ~ 1t
-  - DNS visualization
