@@ -68,6 +68,115 @@ with socketserver.TCPServer(("", PORT), http.server.SimpleHTTPRequestHandler) as
     - sammutin _CTRL-C_ painellen
   - lopetin myös liikenteen kaappausta
 
+## Tutkimustulokset ja niiden analyysi
+
+Kaavioiden käyttämä raakaa dataa [tässä](https://docs.google.com/spreadsheets/d/1iMdz-mzAZvqoU0inuUuqJ8uMR2AHD7dTKB8icnSVH94/edit?usp=sharing).
+
+Kaappausvaiheessa huomasin, että syntyneiden `*.pcap` tiedostojen koko hiemän ylittää odotetun ~5Mt, niin tein sekä tunnelia käyttäen, että käyttämättä muutamaa kaappausta. Siirsin palvelimessa SSH:n kuuntelemaan sen vakioporttiin (22) 1 kaappauksen ajaksi. Asiakkaan koneesta olen myös kokeillut miten vaikuttaa `-o Compression=no` tunnelia rakentaen.
+
+### plain kaappaukset
+
+Tutkimukseen liittyvä liikennettä `ip.addr == 192.168.0.13`:
+
+1. 1976kpl pakettia (5Mt) siirretty 70Mbps nopeudella
+   ![plain-1 kone P](img/plain/192.168.0.13/1.png)
+
+1. 1138kpl pakettia (5Mt) siirretty **4.5kbps** (?!) nopeudella
+   ![plain-2 kone P](img/plain/192.168.0.13/2.png)
+
+1. 1956kpl pakettia (5Mt) siirretty 99Mbps nopeudella
+   ![plain-3 kone P](img/plain/192.168.0.13/3.png)
+
+1. 354kpl pakettia (5Mt) siirretty 96Mbps nopeudella
+   ![plain 4 kone P](img/plain/192.168.0.13/4.png)
+
+Aiheeseen ei liittyvä liikennettä `ip.addr != 192.168.0.13`:
+
+1. raskeimmat siirrot näistä oli 8+4+0,7 Mt, joita lähetettiin [RIPE NCC](https://www.ripe.net/about-us/what-we-do/) organisaatioon kuuluville osoitteille
+   ![plain-1 ei kone P](img/plain/not-192.168.0.13/1.png)
+
+1. jälleen raskeimmat siirrot oli 8+4+3+2+0,8 Mt, jotkut kaikki meni samoin RIPE NCC varaamille osoitteille
+   ![plain-2 ei kone P](img/plain/not-192.168.0.13/2.png)
+
+1. taas, suurimmat siirrot (7+4+2+0.8 Mt) oli tehty RIPE NCC:n osoiteavaruuteen
+   ![plain-3 ei kone P](img/plain/not-192.168.0.13/3.png)
+
+1. jälleen, 8+3+1+0.6 Mt oli siirretty RIPE NCC:n osoiteavaruuteen
+   ![plain-4 ei kone P](img/plain/not-192.168.0.13/4.png)
+
+Yllä käytin perus `whois x.x.x.x` komentoja saada selväksi keneen/mihin kuuluu nämä kyseessä olevat osoitteet. Ilmeisesti nuo IP osoitteet ovat jaettuja eteenpäin - ihmettelinkin, kun on noin isoja varauksia, esim. `NetRange: 89.0.0.0 - 89.255.255.255` ja aika monta eri osoitetta on tuon RIPE NCC:n varaamaa. `whois` kysely palautti riittävän määrän tiedon, jonkun mukaan tein toisen kyselyn selaimen kautta: osoitteelle http://www.ripe.net/whois, ja kävi ilmi että ne isoimmat siirrot oli _MEGA Cloud Services Limited_. Tässä vaiheessa olisi varmasti hyvä mainita, että kyseessä oleva **kone #A** on minun _daily driver_ ja **kone #P** sen edeltäjä. Nauhoituksen ajaksi olen sammuttanut pelkästään webselaimet, mutta unohdin kokonaan taustalla pyörivästä synkronointipalvelusta (joka siis tekee lennossa varmuuskopioita minun henkilökohtaisista tiedostoista).
+
+### tunneloidut kaappaukset
+
+Tutkimukseni aiheeseen kuuluvaa liikennettä (samalla suodattimella, kuin plain kaappausten tapauksessa):
+
+1. SSH kuunteli portilla 55522 **koneessa #P**
+   ![tunneled-1 kone P](img/tunneled/192.168.0.13/1-port55522.png)
+
+1. SSH kuunteli portilla 22 **koneessa #P**
+   ![tunneled-2 kone P](img/tunneled/192.168.0.13/2-port22.png)
+
+1. SSH kuunteli portilla 55522 **koneessa #P**
+   ![tunneled-3 kone P](img/tunneled/192.168.0.13/3-port55522.png)
+
+1. SSH kuunteli portilla 55522 **koneessa #P**, tunnelia rakennettiin ilman compressiota
+   ![tunneled-4 kone P](img/tunneled/192.168.0.13/4-port55522-nocompression.png)
+
+1. SSH kuunteli portilla 55522 **koneessa #P**, tunnelia rakennettiin ilman compressiota
+   ![tunneled-5 kone P](img/tunneled/192.168.0.13/5-port55522-nocompression.png)
+
+1. SSH kuunteli portilla 55522 **koneessa #P**
+   ![tunneled-6 kone P](img/tunneled/192.168.0.13/6-port55522.png)
+
+Aiheeseeni ei kuuluva liikenne, samoin, kuin plain-N tapauksessa, raskaimmat kuului MEGAsync:iin:
+
+1. SSH kuunteli portilla 55522 **koneessa #P**
+   ![tunneled-1 ei kone P](img/tunneled/not-192.168.0.13/1-port55522.png)
+
+1. SSH kuunteli portilla 22 **koneessa #P**
+   ![tunneled-2 ei kone P](img/tunneled/not-192.168.0.13/2-port22.png)
+
+1. SSH kuunteli portilla 55522 **koneessa #P**
+   ![tunneled-3 ei kone P](img/tunneled/not-192.168.0.13/3-port55522.png)
+
+1. SSH kuunteli portilla 55522 **koneessa #P**, tunnelia rakennettiin ilman compressiota
+   ![tunneled-4 ei kone P](img/tunneled/not-192.168.0.13/4-port55522-nocompression.png)
+
+1. SSH kuunteli portilla 55522 **koneessa #P**, tunnelia rakennettiin ilman compressiota
+   ![tunneled-5 ei kone P](img/tunneled/not-192.168.0.13/5-port55522-nocompression.png)
+
+1. SSH kuunteli portilla 55522 **koneessa #P**
+   ![tunneled-6 ei kone P](img/tunneled/not-192.168.0.13/6-port55522.png)
+
+### Vertailu
+
+_Conversations_ näkymän mukaan kaikessa 10 tapauksessa siirretty dataa on tasan "5 Mt". Luotan tähän näykmän antamaan numeroon enemmän, kuin posterissa näkyvään _Packet lengths_ näkymän tietoihin perustuvaan omaan laskelmaani. 5 Mt siirron tapauksessa tunneloinnin tuottama lisäliikenne katoaa perus matikan pyöristyssääntöihin.
+
+#### Vaihtelevat pakettien määrät
+
+Huomasin, että pakettien määrä vaihtelee aika lujaa samankaltaisten siirtojen välissäkin (plain-1 vs plain-4). Kun katsotaan kronologisessa järjestyksessä, voidaan päätellä, että langattomassa verkostossa oli jonkunlainen häiriö, joka poistui 3. tunneloidun nauhoituksen alkamista ennen:
+
+![chronoloically ordered packet quantities](img/charts/chronologically-ordered.svg)
+
+Juurisyytä en lähtenyt selvittämään.
+
+#### pakettikoiden jakautuma
+
+**Koneen #A** saamat paketit ovat melko isoja, suurin osa niistä tippuu Wiresharkin isoimpiin luokittamiin kategorioihin (1280+ tavua), nehän sisältävät käytännössä ladatun tiedoston:
+
+![downlink](img/charts/rcvd-packets.svg)
+
+Samalla **koneen #A** lähettämät paketit ovat lähinnä kuittauksia, enintään 160 tavun kokoisia:
+
+![uplink](img/charts/sent-packets.svg)
+
+## Reflektio:
+
+- Ei olisi saanut sisältää SSH tunnelin rakentamisen kaapauksiin, koska niitähän Wireshark on laskenut mukaan "siirron kestoon" vaikka niissä olikin muutamaa sekuntia tyhjäkäynti, kunnes käynnistin latauksen käsin ja sammutin tunnelin.
+- Myös olisi pitänyt testitiedoston koota kasvattaa, vaikka 500Mt, ehkä silloin olisi käynyt ilmi _Conversations_ tilastosta pari Mt lisäliikennettä tunnelia käyttäen.
+- Lisäksi olisi pitänyt myös sammuttaa MEGAsync:in nauhoituksen ajaksi.
+- Olisi pitänyt välttää langattoman verkoston ja käyttää suunnitelmani mukaan 1Gbe kaapelia, jotta pakettimäärien vaihtelu ois ollut paljon pienempi/tasaisempi
+
 ## Posteritilaisuuden raportti
 
 Tässä 27.5 järjestetyn posteritilaisuuden raportit 5 eri minun opiskelijatoverin tekemistä.
