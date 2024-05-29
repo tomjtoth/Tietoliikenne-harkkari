@@ -4,6 +4,10 @@ _tekijä Tamás Tóth_
 
 <div style="page-break-after: always;"></div>
 
+## Johdanto
+
+Tässä tutkimuksessa pohdin paljonko enemmän paketin/viestin vaihdon aiheuttaa SSH tunnelin käyttö oman tietokoneen verkkoliikenteen kaappauksen avulla. Vilkasin myös pakettikoiden jakautumaa palvelin ja asiakkaan näkökulmasta.
+
 ## Tutkimusprosessin kuvaus
 
 Tutkimuksessa käytin 2kpl tietokonetta, jotkut sijaitsevat samassa aliverkossa. Alkuperaisesta suunnitelmasta poiketen, en ole käyttänyt 1kpl verkkokaapelia yhteyden luontiin, vaan käytin oman langattoman kotiverkoston DHCP palvelua, joten **palvelin** roolissa osallistuvan **koneen #P** osoite oli `192.168.0.13` ja **asiakas** roolissa osallistuvan **koneen #A** osoite oli `192.168.0.66`.
