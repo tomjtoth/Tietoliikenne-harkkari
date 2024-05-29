@@ -72,6 +72,8 @@ with socketserver.TCPServer(("", PORT), http.server.SimpleHTTPRequestHandler) as
 
 _Conversations_ näkymä löytyi vasta posteritilaisuuden jälkeen, sillä pystyin katsoa tarkasti paljonko dataa on siirtynyt. _Packet lengths_ näkymä myös oli käytössä saamaan selväksi osapuolien lähettämien pakettien koiden jakautumaa.
 
+<div style="page-break-after: always;"></div>
+
 ## Tutkimustulokset ja niiden analyysi
 
 Kaavioiden käyttämä raakaa dataa [tässä](https://docs.google.com/spreadsheets/d/1iMdz-mzAZvqoU0inuUuqJ8uMR2AHD7dTKB8icnSVH94/edit?usp=sharing).
@@ -109,6 +111,8 @@ Aiheeseen ei liittyvä liikennettä `ip.addr != 192.168.0.13`:
    ![plain-4 ei kone P](img/plain/not-192.168.0.13/4.png)
 
 Yllä käytin perus `whois x.x.x.x` komentoja saada selväksi keneen/mihin kuuluu nämä kyseessä olevat osoitteet. Ilmeisesti nuo IP osoitteet ovat jaettuja eteenpäin - ihmettelinkin, kun on noin isoja varauksia, esim. `NetRange: 89.0.0.0 - 89.255.255.255` ja aika monta eri osoitetta on tuon RIPE NCC:n varaamaa. `whois` kysely palautti riittävän määrän tiedon, jonkun mukaan tein toisen kyselyn selaimen kautta: osoitteelle http://www.ripe.net/whois, ja kävi ilmi että ne isoimmat siirrot oli _MEGA Cloud Services Limited_. Tässä vaiheessa olisi varmasti hyvä mainita, että kyseessä oleva **kone #A** on minun _daily driver_ ja **kone #P** sen edeltäjä. Nauhoituksen ajaksi olen sammuttanut pelkästään webselaimet, mutta unohdin kokonaan taustalla pyörivästä synkronointipalvelusta (joka siis tekee lennossa varmuuskopioita minun henkilökohtaisista tiedostoista).
+
+<div style="page-break-after: always;"></div>
 
 ### tunneloidut kaappaukset
 
@@ -152,6 +156,8 @@ Aiheeseeni ei kuuluva liikenne, samoin, kuin plain-N tapauksessa, raskaimmat kuu
 1. SSH kuunteli portilla 55522 **koneessa #P**
    ![tunneled-6 ei kone P](img/tunneled/not-192.168.0.13/6-port55522.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Vertailu
 
 _Conversations_ näkymän mukaan kaikessa 10 tapauksessa siirretty dataa on tasan "5 Mt". Luotan tähän näykmän antamaan numeroon enemmän, kuin posterissa näkyvään _Packet lengths_ näkymän tietoihin perustuvaan omaan laskelmaani. 5 Mt siirron tapauksessa tunneloinnin tuottama lisäliikenne katoaa perus matikan pyöristyssääntöihin.
@@ -177,12 +183,16 @@ Samalla **koneen #A** lähettämät paketit ovat lähinnä kuittauksia, enintä�
 
 Mielenkiintoinen ilmiö, että tunnelia käyttämättä lähes kaikki **koneeseen #P** lähetetyt paketit ovat kooltaan 40-79, mutta **tunnelia käyttäen koot myös kasvoi** (yllä kaavion vihreät alueet) ylittäen 80 tavua. **Koneeseen #A** saapuvien pakettien koossa en huomannut tunnelin käytön vaikutusta.
 
+<div style="page-break-after: always;"></div>
+
 ## Reflektio:
 
 - Ei olisi saanut sisältää SSH tunnelin rakentamisen kaapauksiin, koska niitähän Wireshark on laskenut mukaan "siirron kestoon" vaikka niissä olikin muutamaa sekuntia tyhjäkäynti, kunnes käynnistin latauksen käsin ja sammutin tunnelin.
 - Myös olisi pitänyt testitiedoston koota kasvattaa, vaikka 500Mt, ehkä silloin olisi käynyt ilmi _Conversations_ tilastosta pari Mt lisäliikennettä tunnelia käyttäen.
 - Lisäksi olisi pitänyt myös sammuttaa MEGAsync:in nauhoituksen ajaksi.
 - Olisi pitänyt välttää langattoman verkoston ja käyttää suunnitelmani mukaan 1Gbe kaapelia, jotta pakettimäärien vaihtelu ois ollut paljon pienempi/tasaisempi
+
+<div style="page-break-after: always;"></div>
 
 ## Posteritilaisuuden raportti
 
@@ -236,4 +246,4 @@ Tutkimusmenetelmä on hyvin kuvattu, tosi mielenkiintoinen pohdinta tuossa aluss
 | 26.5.2024 | 3      | posteriluonnos jatko                                                                      |
 | 27.5.2024 | 3      | 5kpl arvostelun kirjaaminen                                                               |
 | 28.5.2024 | 9      | loppuraportti                                                                             |
-| 29.5.2024 | 6      | loppuraportti                                                                             |
+| 29.5.2024 | 7      | loppuraportti                                                                             |
