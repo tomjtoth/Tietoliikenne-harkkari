@@ -68,6 +68,10 @@ with socketserver.TCPServer(("", PORT), http.server.SimpleHTTPRequestHandler) as
     - sammutin _CTRL-C_ painellen
   - lopetin myös liikenteen kaappausta
 
+## Analyysi
+
+_Conversations_ näkymä löytyi vasta posteritilaisuuden jälkeen, sillä pystyin katsoa tarkasti paljonko dataa on siirtynyt. _Packet lengths_ näkymä myös oli käytössä saamaan selväksi osapuolien lähettämien pakettien koiden jakautumaa.
+
 ## Tutkimustulokset ja niiden analyysi
 
 Kaavioiden käyttämä raakaa dataa [tässä](https://docs.google.com/spreadsheets/d/1iMdz-mzAZvqoU0inuUuqJ8uMR2AHD7dTKB8icnSVH94/edit?usp=sharing).
@@ -159,6 +163,7 @@ Huomasin, että pakettien määrä vaihtelee aika lujaa samankaltaisten siirtoje
 ![chronoloically ordered packet quantities](img/charts/chronologically-ordered.svg)
 
 Juurisyytä en lähtenyt selvittämään.
+Pakettien kokonaismäärä on siis tunnelia käyttäen (4 mittauksen perusteella keskimäärin): 512kpl, samoin tunnelia käyttämättä 354kpl, josta voi laskea yli 40% enempää pakettia.
 
 #### pakettikoiden jakautuma
 
@@ -169,6 +174,8 @@ Juurisyytä en lähtenyt selvittämään.
 Samalla **koneen #A** lähettämät paketit ovat lähinnä kuittauksia, enintään 160 tavun kokoisia:
 
 ![uplink](img/charts/sent-packets.svg)
+
+Mielenkiintoinen ilmiö, että tunnelia käyttämättä lähes kaikki **koneeseen #P** lähetetyt paketit ovat kooltaan 40-79, mutta sitä käyttäen koot myös kasvoi (yllä kaavion vihreät alueet) ylittäen 80 tavua. **Koneeseen #A** saapuvien pakettien koossa en huomannut tunnelin käytön vaikutusta.
 
 ## Reflektio:
 
@@ -214,4 +221,19 @@ Tutkimusmenetelmä on hyvin kuvattu, tosi mielenkiintoinen pohdinta tuossa aluss
 
 ## Tuntikirjanpito
 
-Siirretty [tänne](https://docs.google.com/spreadsheets/d/1iMdz-mzAZvqoU0inuUuqJ8uMR2AHD7dTKB8icnSVH94/edit?usp=sharing)
+| pvm       | tunnit | saavutusten kuvaus                                                                        |
+| --------- | ------ | ----------------------------------------------------------------------------------------- |
+| 6.5.2024  | 4      | kurssimateriaalin läpikäynti, eri suodattimien kokeilu                                    |
+| 7.5.2024  | 1      | DNS visualization                                                                         |
+| 7.5.2024  | 1      | 2 kaappauskokeilua                                                                        |
+| 8.5.2024  | 2      | kaappaus VM:ssa SVM-11 luettavan/siirrettävän tiedoston                                   |
+| 10.5.2024 | 1      | aiheen keksiminen                                                                         |
+| 12.5.2024 | 2      | raportin jatkaminen                                                                       |
+| 13.5.2024 | 3      | raportin jatkaminen                                                                       |
+| 16.5.2024 | 6      | tehtävänannon lukeminen; tutkimuksen menetelmän kuvaus; nginx.conf                        |
+| 17.5.2024 | 2      | luovutin nginx:sta, otin python skripti käyttöön; yms                                     |
+| 20.5.2024 | 4      | alkeellinen .html pohja posterille, josta luovutin; posteriluonnos; eka kaappaukset tehty |
+| 26.5.2024 | 3      | posteriluonnos jatko                                                                      |
+| 27.5.2024 | 3      | 5kpl arvostelun kirjaaminen                                                               |
+| 28.5.2024 | 9      | loppuraportti                                                                             |
+| 29.5.2024 | 5      | loppuraportti                                                                             |
