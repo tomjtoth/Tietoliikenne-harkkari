@@ -163,7 +163,7 @@ Huomasin, että pakettien määrä vaihtelee aika lujaa samankaltaisten siirtoje
 ![chronoloically ordered packet quantities](img/charts/chronologically-ordered.svg)
 
 Juurisyytä en lähtenyt selvittämään.
-Pakettien kokonaismäärä on siis tunnelia käyttäen (4 mittauksen perusteella keskimäärin): 512kpl, samoin tunnelia käyttämättä 354kpl, josta voi laskea yli 40% enempää pakettia.
+Pakettien kokonaismäärä on siis **tunnelia käyttäen** (4 mittauksen perusteella keskimäärin): 512kpl, samoin tunnelia käyttämättä 354kpl, josta voi laskea **yli 40% enempää pakettia**.
 
 #### pakettikoiden jakautuma
 
@@ -175,7 +175,7 @@ Samalla **koneen #A** lähettämät paketit ovat lähinnä kuittauksia, enintä�
 
 ![uplink](img/charts/sent-packets.svg)
 
-Mielenkiintoinen ilmiö, että tunnelia käyttämättä lähes kaikki **koneeseen #P** lähetetyt paketit ovat kooltaan 40-79, mutta sitä käyttäen koot myös kasvoi (yllä kaavion vihreät alueet) ylittäen 80 tavua. **Koneeseen #A** saapuvien pakettien koossa en huomannut tunnelin käytön vaikutusta.
+Mielenkiintoinen ilmiö, että tunnelia käyttämättä lähes kaikki **koneeseen #P** lähetetyt paketit ovat kooltaan 40-79, mutta **tunnelia käyttäen koot myös kasvoi** (yllä kaavion vihreät alueet) ylittäen 80 tavua. **Koneeseen #A** saapuvien pakettien koossa en huomannut tunnelin käytön vaikutusta.
 
 ## Reflektio:
 
@@ -236,4 +236,4 @@ Tutkimusmenetelmä on hyvin kuvattu, tosi mielenkiintoinen pohdinta tuossa aluss
 | 26.5.2024 | 3      | posteriluonnos jatko                                                                      |
 | 27.5.2024 | 3      | 5kpl arvostelun kirjaaminen                                                               |
 | 28.5.2024 | 9      | loppuraportti                                                                             |
-| 29.5.2024 | 5      | loppuraportti                                                                             |
+| 29.5.2024 | 6      | loppuraportti                                                                             |
