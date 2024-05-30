@@ -247,3 +247,4 @@ Tutkimusmenetelmä on hyvin kuvattu, tosi mielenkiintoinen pohdinta tuossa aluss
 | 27.5.2024 | 3      | 5kpl arvostelun kirjaaminen                                                               |
 | 28.5.2024 | 9      | loppuraportti                                                                             |
 | 29.5.2024 | 7      | loppuraportti                                                                             |
+| 30.5.2024 | 1      | loppuraportti additional styling, which got eventually scrapped :D                        |
